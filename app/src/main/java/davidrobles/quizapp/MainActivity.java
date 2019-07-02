@@ -147,10 +147,28 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
             Toast hintToast = Toast.makeText(this,mQuestions[mIndex].getHintTextResId(), Toast.LENGTH_LONG);
             hintToast.show();
         }
-        else if(view.getId() == R.id.prev_button)
-        {
+        else if(view.getId() == R.id.prev_button) {
             mIndex--;
             mHintIndex--;
+
+            if(mQuestions[mIndex].isTrueFalseQuestion())
+            {
+                mTrueFalseContainer.setVisibility(View.VISIBLE);
+                mFillTheBlankContainer.setVisibility(View.GONE);
+                mMultipleChoiceContainer.setVisibility(View.GONE);
+            }
+            else if(mQuestions[mIndex].isFillTheBlankQuestion())
+            {
+                mTrueFalseContainer.setVisibility(View.GONE);
+                mFillTheBlankContainer.setVisibility(View.VISIBLE);
+                mMultipleChoiceContainer.setVisibility(View.GONE);
+            }
+            else if(mQuestions[mIndex].isMultipleChoiceQuestion())
+            {
+                mTrueFalseContainer.setVisibility(View.GONE);
+                mFillTheBlankContainer.setVisibility(View.GONE);
+                mMultipleChoiceContainer.setVisibility(View.VISIBLE);
+            }
 
             if(mIndex >= 0)
             {
@@ -159,6 +177,13 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
                 {
                     mPrevButton.setVisibility(View.GONE);
                 }
+            }
+            else if(mIndex < 5)
+            {
+                mCheckButton.setVisibility(View.GONE);
+//                mTrueFalseContainer.setVisibility(View.VISIBLE);
+//                mFillTheBlankContainer.setVisibility(View.GONE);
+//                mMultipleChoiceContainer.setVisibility(View.GONE);
             }
         }
         else if(view.getId() == R.id.next_button)
